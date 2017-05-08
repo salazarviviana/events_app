@@ -1,0 +1,48 @@
+<html>
+    <head> 
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="jumbotron">
+            <div class="container">
+                <h2>Here are the top {{ num_results }} most popular events in {{ city }}</h2>
+                <h2>Have Fun!!</h2>
+                <br />
+                <br />
+                <a class="btn btn-primary" href="{{ url_for('home') }}" role="button">Start your search again</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class=row>
+                {% for id in events_list %}
+                    {% if id != 0 %}
+                        <div class="col-md-4">
+                                <h2> {{ id[1]['name'] }}</h2>
+                                <p>People Interested: {{ id[1]['interested_count'] }}</p>
+                                <p>When: {{ id[1]['start_time'] }}</p>
+                                {% if id[1].get('place') %}
+                                    <p>Where: {{ id[1]['place']['name'] }}</p>
+                                {%else %}
+                                    <p>Where: {{ id[1].get('place') }}</p>
+                                {% endif %}
+                        </div>
+                    {% else %}
+                        </div>
+                        <div class=row>
+                            <div class="col-md-4">
+                                <h2> {{ id[1]['name'] }}</h2>
+                                <p>People Interested: {{ id[1]['interested_count'] }}</p>
+                                <p>When: {{ id[1]['start_time'] }}</p>
+                                {% if id[1].get('place') %}
+                                    <p>Where: {{ id[1]['place']['name'] }}</p>
+                                {%else %}
+                                    <p>Where: {{ id[1].get('place') }}</p>
+                                {% endif %}
+                            </div>
+                    {% endif %}        
+                {% endfor %}    
+            </div>
+        </div>
+    </body>
+</html>
+
